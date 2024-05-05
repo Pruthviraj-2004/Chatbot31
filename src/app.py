@@ -9,13 +9,13 @@ from langchain_openai import ChatOpenAI
 from langchain_groq import ChatGroq
 import streamlit as st
 
-def init_database(user: str, password: str, host: str, port: str, database: str) -> SQLDatabase:
-  db_uri = f"mysql+mysqlconnector://{user}:{password}@{host}:{port}/{database}"
-  return SQLDatabase.from_uri(db_uri)
-
-# def init_database() -> SQLDatabase:
-#   db_uri = "mysql+mysqlconnector://root:7516@localhost:3306/technoindustry"
+# def init_database(user: str, password: str, host: str, port: str, database: str) -> SQLDatabase:
+#   db_uri = f"mysql+mysqlconnector://{user}:{password}@{host}:{port}/{database}"
 #   return SQLDatabase.from_uri(db_uri)
+
+def init_database() -> SQLDatabase:
+  db_uri = "mysql+mysqlconnector://sql6704164: 9BUqrKUvx1@sql6.freesqldatabase.com:3306/sql6704164"
+  return SQLDatabase.from_uri(db_uri)
 
 def get_sql_chain(db):
   template = """
@@ -155,26 +155,26 @@ with st.sidebar:
     st.subheader("Settings")
     st.write("This is a simple chat application using MySQL. Connect to the database and start chatting.")
     
-    st.text_input("Host", value="localhost", key="Host")
-    st.text_input("Port", value="3306", key="Port")
-    st.text_input("User", value="root", key="User")
-    st.text_input("Password", type="password", value="7516", key="Password")
-    st.text_input("Database", value="ipl_prediction", key="Database")
+    # st.text_input("Host", value="localhost", key="Host")
+    # st.text_input("Port", value="3306", key="Port")
+    # st.text_input("User", value="root", key="User")
+    # st.text_input("Password", type="password", value="7516", key="Password")
+    # st.text_input("Database", value="ipl_prediction", key="Database")
     
-    if st.button("Connect"):
-        with st.spinner("Connecting to database..."):
-            db = init_database(
-                st.session_state["User"],
-                st.session_state["Password"],
-                st.session_state["Host"],
-                st.session_state["Port"],
-                st.session_state["Database"]
-            )
-            st.session_state.db = db
-            st.success("Connected to database!")
+    # if st.button("Connect"):
+    #     with st.spinner("Connecting to database..."):
+    #         db = init_database(
+    #             st.session_state["User"],
+    #             st.session_state["Password"],
+    #             st.session_state["Host"],
+    #             st.session_state["Port"],
+    #             st.session_state["Database"]
+    #         )
+    #         st.session_state.db = db
+    #         st.success("Connected to database!")
 
-      # db = init_database()
-      # st.session_state.db = db
+      db = init_database()
+      st.session_state.db = db
 
 for message in st.session_state.chat_history:
     if isinstance(message, AIMessage):
