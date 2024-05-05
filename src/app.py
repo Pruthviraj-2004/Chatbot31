@@ -68,18 +68,14 @@ def get_response(user_query: str, db: SQLDatabase, chat_history: list):
     Conversation History: {chat_history}
     SQL Query: <SQL>{query}</SQL>
     User question: {question}
-    SQL Response: {response}
-    Please Note: "if SQL Response is showing an error give a meaningful message on How to write a prompt that the system would understand based on the error.
-    Please give examples of prompt related to user query.
-    if there is no error from the sql response then provide the actual result."
-    """
+    SQL Response: {response}"""
   
   prompt = ChatPromptTemplate.from_template(template)
-  print(prompt)
   
-  llm = ChatOpenAI(model="gpt-3.5-turbo-0125", api_key="sk-proj-R4ptseNacbDbauDN4828T3BlbkFJBrygGXOUAKS0kTkJPi5y")
-  # llm = ChatOpenAI(model="gpt-3.5-1106")
+  # llm = ChatOpenAI(model="gpt-4-0125-preview")
   # llm = ChatGroq(model="mixtral-8x7b-32768", temperature=0)
+  llm = ChatOpenAI(model="gpt-3.5-turbo", api_key="sk-proj-R4ptseNacbDbauDN4828T3BlbkFJBrygGXOUAKS0kTkJPi5y")
+
   
   chain = (
     RunnablePassthrough.assign(query=sql_chain).assign(
