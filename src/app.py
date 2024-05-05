@@ -92,44 +92,44 @@ def get_sql_chain(db):
 #     "question": user_query,
 #     "chat_history": chat_history,
 #   })
-def get_response(user_query: str, db: SQLDatabase, chat_history: list):
-  sql_chain = get_sql_chain(db)
+# def get_response(user_query: str, db: SQLDatabase, chat_history: list):
+#   sql_chain = get_sql_chain(db)
   
-  template = """
-    You are a data analyst at a company. You are interacting with a user who is asking you questions about the company's database.
-    Based on the table schema below, question, sql query, and sql response, write a natural language response.
-    <SCHEMA>{schema}</SCHEMA>
+#   template = """
+#     You are a data analyst at a company. You are interacting with a user who is asking you questions about the company's database.
+#     Based on the table schema below, question, sql query, and sql response, write a natural language response.
+#     <SCHEMA>{schema}</SCHEMA>
 
-    Conversation History: {chat_history}
-    SQL Query: <SQL>{query}</SQL>
-    User question: {question}
-    SQL Response: {response}
-    Please Note: "if SQL Response is showing an error give a meaningful message on How to write a prompt that the system would understand based on the error.
-    Please give examples of prompt related to user query.
-    if there is no error from the sql response then provide the actual result."
-    """
+#     Conversation History: {chat_history}
+#     SQL Query: <SQL>{query}</SQL>
+#     User question: {question}
+#     SQL Response: {response}
+#     Please Note: "if SQL Response is showing an error give a meaningful message on How to write a prompt that the system would understand based on the error.
+#     Please give examples of prompt related to user query.
+#     if there is no error from the sql response then provide the actual result."
+#     """
   
-  prompt = ChatPromptTemplate.from_template(template)
-  print(prompt)
+#   prompt = ChatPromptTemplate.from_template(template)
+#   print(prompt)
   
-  llm = ChatOpenAI(model="gpt-3.5-turbo", api_key=OPENAI_API_KEY)
-  # llm = ChatOpenAI(model="gpt-3.5-1106")
-  # llm = ChatGroq(model="mixtral-8x7b-32768", temperature=0)
+#   llm = ChatOpenAI(model="gpt-4-turbo", api_key=OPENAI_API_KEY)
+#   # llm = ChatOpenAI(model="gpt-3.5-1106")
+#   # llm = ChatGroq(model="mixtral-8x7b-32768", temperature=0)
   
-  chain = (
-    RunnablePassthrough.assign(query=sql_chain).assign(
-      schema=lambda _: db.get_table_info(),
-      response=lambda vars: db.run(vars["query"]),
-    )
-    | prompt
-    | llm
-    | StrOutputParser()
-  )
+#   chain = (
+#     RunnablePassthrough.assign(query=sql_chain).assign(
+#       schema=lambda _: db.get_table_info(),
+#       response=lambda vars: db.run(vars["query"]),
+#     )
+#     | prompt
+#     | llm
+#     | StrOutputParser()
+#   )
   
-  return chain.invoke({
-    "question": user_query,
-    "chat_history": chat_history,
-  })
+#   return chain.invoke({
+#     "question": user_query,
+#     "chat_history": chat_history,
+#   })
     
 def get_response(user_query: str, db: SQLDatabase, chat_history: list):
     try:
@@ -149,7 +149,7 @@ def get_response(user_query: str, db: SQLDatabase, chat_history: list):
         
         prompt = ChatPromptTemplate.from_template(template)
         
-        llm = ChatOpenAI(model="gpt-4-turbo-0125", api_key=OPENAI_API_KEY)
+        llm = ChatOpenAI(model="gpt-4-turbo", api_key=OPENAI_API_KEY)
         
         chain = (
             RunnablePassthrough.assign(query=sql_chain).assign(
