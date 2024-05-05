@@ -41,7 +41,7 @@ def get_sql_chain(db):
     """
     
   prompt = ChatPromptTemplate.from_template(template)
-  llm = ChatOpenAI(model="gpt-3.5-turbo-0125", api_key="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")
+  llm = ChatOpenAI(model="gpt-3.5-turbo", api_key="sk-proj-fzSeeXdcEINyG09yeUULT3BlbkFJXbWuka1ZPks9j5LVRqrZ")
 
   # llm = ChatOpenAI(model="gpt-3.5-1106")
   # gpt-3.5-turbo-0125
@@ -113,7 +113,7 @@ def get_response(user_query: str, db: SQLDatabase, chat_history: list):
             """
         
         prompt = ChatPromptTemplate.from_template(template)
-        llm = ChatOpenAI(model="gpt-3.5-turbo-0125", api_key="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")
+        llm = ChatOpenAI(model="gpt-3.5-turbo", api_key="sk-proj-fzSeeXdcEINyG09yeUULT3BlbkFJXbWuka1ZPks9j5LVRqrZ")
 
         
         chain = (
