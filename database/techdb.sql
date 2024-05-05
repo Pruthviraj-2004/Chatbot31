@@ -38,7 +38,7 @@ CREATE TABLE `app1_calibrationreport` (
   PRIMARY KEY (`calibrationtool_id`),
   KEY `app1_calibrationreport_calibration_tool_id_9142b981` (`calibration_tool_id`),
   CONSTRAINT `fk_sqlite_master_app1_instrumentmodel_0` FOREIGN KEY (`calibration_tool_id`) REFERENCES `app1_instrumentmodel` (`instrument_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +72,7 @@ CREATE TABLE `app1_deliverychallan` (
   CONSTRAINT `fk_app1_calibrationreport_app1_serviceorder_2` FOREIGN KEY (`service_id`) REFERENCES `app1_serviceorder` (`service_id`),
   CONSTRAINT `fk_app1_calibrationreport_app1_sheddetails_1` FOREIGN KEY (`shed_id`) REFERENCES `app1_sheddetails` (`shed_id`),
   CONSTRAINT `fk_app1_calibrationreport_app1_vendor_0` FOREIGN KEY (`vendor_id`) REFERENCES `app1_vendor` (`vendor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,7 +105,8 @@ CREATE TABLE `app1_deliverychallantools` (
   CONSTRAINT `fk_app1_deliverychallan_app1_calibrationreport_0` FOREIGN KEY (`calibration_report_id`) REFERENCES `app1_calibrationreport` (`calibrationtool_id`),
   CONSTRAINT `fk_app1_deliverychallan_app1_deliverychallan_2` FOREIGN KEY (`deliverychallan_id`) REFERENCES `app1_deliverychallan` (`deliverychallan_id`),
   CONSTRAINT `fk_app1_deliverychallan_app1_instrumentmodel_1` FOREIGN KEY (`tool_id`) REFERENCES `app1_instrumentmodel` (`instrument_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,7 +134,8 @@ CREATE TABLE `app1_instrumentfamilygroup` (
   PRIMARY KEY (`instrumentfamilyid`),
   KEY `app1_instrumentfamilygroup_instrument_group_master_id_fd682a35` (`instrument_group_master_id`),
   CONSTRAINT `fk_app1_deliverychallantools_app1_instrumentgroupmaster_0` FOREIGN KEY (`instrument_group_master_id`) REFERENCES `app1_instrumentgroupmaster` (`tool_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +162,8 @@ CREATE TABLE `app1_instrumentgroupmaster` (
   `instrument_type` varchar(16) NOT NULL COMMENT 'TRIAL',
   `trial985` char(1) DEFAULT NULL COMMENT 'TRIAL',
   PRIMARY KEY (`tool_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -196,7 +199,7 @@ CREATE TABLE `app1_instrumentmodel` (
   PRIMARY KEY (`instrument_no`),
   KEY `app1_instrumentmodel_type_of_tool_id_7bdb85b0` (`type_of_tool_id`),
   CONSTRAINT `fk_app1_instrumentgroupmaster_app1_instrumentgroupmaster_0` FOREIGN KEY (`type_of_tool_id`) REFERENCES `app1_instrumentgroupmaster` (`tool_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -227,9 +230,8 @@ CREATE TABLE `app1_serviceorder` (
   PRIMARY KEY (`service_id`),
   KEY `app1_serviceorder_vendor_id_2230c4c7` (`vendor_id`),
   CONSTRAINT `fk_app1_instrumentmodel_app1_vendor_0` FOREIGN KEY (`vendor_id`) REFERENCES `app1_vendor` (`vendor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
 /*!40101 SET character_set_client = @saved_cs_client */;
-
 --
 -- Dumping data for table `app1_serviceorder`
 --
@@ -261,8 +263,9 @@ CREATE TABLE `app1_servicetools` (
   CONSTRAINT `fk_app1_serviceorder_app1_instrumentmodel_1` FOREIGN KEY (`tool_id`) REFERENCES `app1_instrumentmodel` (`instrument_no`),
   CONSTRAINT `fk_app1_serviceorder_app1_serviceorder_2` FOREIGN KEY (`service_id`) REFERENCES `app1_serviceorder` (`service_id`),
   CONSTRAINT `fk_app1_serviceorder_app1_vendor_0` FOREIGN KEY (`vendor_id`) REFERENCES `app1_vendor` (`vendor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
 /*!40101 SET character_set_client = @saved_cs_client */;
+
 
 --
 -- Dumping data for table `app1_servicetools`
@@ -288,7 +291,7 @@ CREATE TABLE `app1_sheddetails` (
   `phone_number` varchar(10) NOT NULL COMMENT 'TRIAL',
   `trial985` char(1) DEFAULT NULL COMMENT 'TRIAL',
   PRIMARY KEY (`shed_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -318,7 +321,7 @@ CREATE TABLE `app1_shedtools` (
   KEY `app1_shedtools_shed_id_367e9af7` (`shed_id`),
   CONSTRAINT `fk_app1_sheddetails_app1_instrumentmodel_0` FOREIGN KEY (`using_tool_id`) REFERENCES `app1_instrumentmodel` (`instrument_no`),
   CONSTRAINT `fk_app1_sheddetails_app1_sheddetails_1` FOREIGN KEY (`shed_id`) REFERENCES `app1_sheddetails` (`shed_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -351,7 +354,7 @@ CREATE TABLE `app1_transportorder` (
   KEY `app1_transportorder_destination_shed_id_c8e9b67b` (`destination_shed_id`),
   CONSTRAINT `fk_app1_shedtools_app1_sheddetails_0` FOREIGN KEY (`source_shed_id`) REFERENCES `app1_sheddetails` (`shed_id`),
   CONSTRAINT `fk_app1_shedtools_app1_sheddetails_1` FOREIGN KEY (`destination_shed_id`) REFERENCES `app1_sheddetails` (`shed_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -382,7 +385,7 @@ CREATE TABLE `app1_transporttools` (
   KEY `app1_transporttools_tool_id_8302848b` (`tool_id`),
   CONSTRAINT `fk_app1_transportorder_app1_instrumentmodel_1` FOREIGN KEY (`tool_id`) REFERENCES `app1_instrumentmodel` (`instrument_no`),
   CONSTRAINT `fk_app1_transportorder_app1_transportorder_0` FOREIGN KEY (`transport_id`) REFERENCES `app1_transportorder` (`movement_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -410,7 +413,7 @@ CREATE TABLE `app1_vendor` (
   `phone_number` varchar(10) NOT NULL COMMENT 'TRIAL',
   `trial989` char(1) DEFAULT NULL COMMENT 'TRIAL',
   PRIMARY KEY (`vendor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -426,10 +429,7 @@ UNLOCK TABLES;
 --
 -- Table structure for table `app1_vendorhandles`
 --
-
 DROP TABLE IF EXISTS `app1_vendorhandles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `app1_vendorhandles` (
   `vendorhandle_id` int NOT NULL AUTO_INCREMENT COMMENT 'TRIAL',
   `turnaround_time` int NOT NULL COMMENT 'TRIAL',
@@ -442,8 +442,7 @@ CREATE TABLE `app1_vendorhandles` (
   KEY `app1_vendorhandles_tool_id_e0231463` (`tool_id`),
   CONSTRAINT `fk_app1_vendor_app1_instrumentmodel_1` FOREIGN KEY (`tool_id`) REFERENCES `app1_instrumentmodel` (`instrument_no`),
   CONSTRAINT `fk_app1_vendor_app1_vendor_0` FOREIGN KEY (`vendor_id`) REFERENCES `app1_vendor` (`vendor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
 
 --
 -- Dumping data for table `app1_vendorhandles`
@@ -467,7 +466,7 @@ CREATE TABLE `auth_group` (
   `name` varchar(150) NOT NULL COMMENT 'TRIAL',
   `trial989` char(1) DEFAULT NULL COMMENT 'TRIAL',
   PRIMARY KEY (`id`,`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -497,7 +496,7 @@ CREATE TABLE `auth_group_permissions` (
   KEY `auth_group_permissions_group_id_b120cbf9` (`group_id`),
   CONSTRAINT `fk_auth_group_auth_group_1` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
   CONSTRAINT `fk_auth_group_auth_permission_0` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -526,7 +525,7 @@ CREATE TABLE `auth_permission` (
   UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
   KEY `auth_permission_content_type_id_2f476e4b` (`content_type_id`),
   CONSTRAINT `fk_auth_group_permissions_django_content_type_0` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -560,7 +559,7 @@ CREATE TABLE `auth_user` (
   `first_name` varchar(150) NOT NULL COMMENT 'TRIAL',
   `trial989` char(1) DEFAULT NULL COMMENT 'TRIAL',
   PRIMARY KEY (`id`,`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -591,7 +590,7 @@ CREATE TABLE `auth_user_groups` (
   KEY `auth_user_groups_user_id_6a12ed8b` (`user_id`),
   CONSTRAINT `fk_auth_user_auth_group_0` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
   CONSTRAINT `fk_auth_user_auth_user_1` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -621,7 +620,7 @@ CREATE TABLE `auth_user_user_permissions` (
   KEY `auth_user_user_permissions_user_id_a95ead1b` (`user_id`),
   CONSTRAINT `fk_auth_user_groups_auth_permission_0` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   CONSTRAINT `fk_auth_user_groups_auth_user_1` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -655,7 +654,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_content_type_id_c4bce8eb` (`content_type_id`),
   CONSTRAINT `fk_auth_user_user_permissions_auth_user_0` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `fk_auth_user_user_permissions_django_content_type_1` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=295 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB AUTO_INCREMENT=295 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -682,7 +681,7 @@ CREATE TABLE `django_content_type` (
   `trial992` char(1) DEFAULT NULL COMMENT 'TRIAL',
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -709,7 +708,7 @@ CREATE TABLE `django_migrations` (
   `applied` datetime NOT NULL COMMENT 'TRIAL',
   `trial992` char(1) DEFAULT NULL COMMENT 'TRIAL',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -736,7 +735,7 @@ CREATE TABLE `django_session` (
   `trial992` char(1) DEFAULT NULL COMMENT 'TRIAL',
   PRIMARY KEY (`session_key`),
   KEY `django_session_expire_date_a5c62663` (`expire_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -760,7 +759,7 @@ CREATE TABLE `sqlite_sequence` (
   `name` longtext COMMENT 'TRIAL',
   `seq` longtext COMMENT 'TRIAL',
   `trial992` char(1) DEFAULT NULL COMMENT 'TRIAL'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='TRIAL';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='TRIAL';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
