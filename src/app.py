@@ -173,8 +173,8 @@ with st.sidebar:
     #         st.session_state.db = db
     #         st.success("Connected to database!")
 
-      db = init_database()
-      st.session_state.db = db
+    db = init_database()
+    st.session_state.db = db
 
 for message in st.session_state.chat_history:
     if isinstance(message, AIMessage):
