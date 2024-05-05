@@ -14,7 +14,7 @@ import streamlit as st
 #   return SQLDatabase.from_uri(db_uri)
 
 def init_database() -> SQLDatabase:
-  db_uri = "mysql+mysqlconnector://sql6704164: 9BUqrKUvx1@sql6.freesqldatabase.com:3306/sql6704164"
+  db_uri = "mysql+mysqlconnector://sql6704164:9BUqrKUvx1@sql6.freesqldatabase.com:3306/sql6704164"
   return SQLDatabase.from_uri(db_uri)
 
 def get_sql_chain(db):
