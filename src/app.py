@@ -45,7 +45,7 @@ def get_sql_chain(db):
   
   # llm = ChatOpenAI(model="gpt-4-0125-preview")
   # llm = ChatGroq(model="mixtral-8x7b-32768", temperature=0)
-  llm = ChatOpenAI(model="gpt-3.5-turbo", api_key=OPENAI_API_KEY)
+  llm = ChatOpenAI(model="gpt-4-turbo", api_key=OPENAI_API_KEY)
 
   
   def get_schema(_):
@@ -149,7 +149,7 @@ def get_response(user_query: str, db: SQLDatabase, chat_history: list):
         
         prompt = ChatPromptTemplate.from_template(template)
         
-        llm = ChatOpenAI(model="gpt-3.5-turbo-0125", api_key=OPENAI_API_KEY)
+        llm = ChatOpenAI(model="gpt-4-turbo-0125", api_key=OPENAI_API_KEY)
         
         chain = (
             RunnablePassthrough.assign(query=sql_chain).assign(
