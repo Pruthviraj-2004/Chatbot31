@@ -9,8 +9,7 @@ from langchain_openai import ChatOpenAI
 from langchain_groq import ChatGroq
 import streamlit as st
 import os
-OPENAI_API_KEY= os.getenv("OPENAI_API_KEY")
-
+OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 
 def init_database(user: str, password: str, host: str, port: str, database: str) -> SQLDatabase:
   db_uri = f"mysql+mysqlconnector://{user}:{password}@{host}:{port}/{database}"
