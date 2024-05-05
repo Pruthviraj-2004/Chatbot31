@@ -16,7 +16,6 @@ def init_database(user: str, password: str, host: str, port: str, database: str)
 # def init_database() -> SQLDatabase:
 #   db_uri = "mysql+mysqlconnector://root:7516@localhost:3306/technoindustry"
 #   return SQLDatabase.from_uri(db_uri)
-
 def get_sql_chain(db):
   template = """
     You are a data analyst at a company. You are interacting with a user who is asking you questions about the company's database.
@@ -42,10 +41,10 @@ def get_sql_chain(db):
     
   prompt = ChatPromptTemplate.from_template(template)
   
-  llm = ChatOpenAI(model="gpt-3.5-turbo", api_key="sk-proj-R4ptseNacbDbauDN4828T3BlbkFJBrygGXOUAKS0kTkJPi5y")
-  # llm = ChatOpenAI(model="gpt-3.5-1106")
-  # gpt-3.5-turbo-0125
+  # llm = ChatOpenAI(model="gpt-4-0125-preview")
   # llm = ChatGroq(model="mixtral-8x7b-32768", temperature=0)
+  llm = ChatOpenAI(model="gpt-3.5-turbo", api_key="sk-proj-R4ptseNacbDbauDN4828T3BlbkFJBrygGXOUAKS0kTkJPi5y")
+
   
   def get_schema(_):
     return db.get_table_info()
@@ -92,49 +91,6 @@ def get_response(user_query: str, db: SQLDatabase, chat_history: list):
     "chat_history": chat_history,
   })
     
-# def get_response(user_query: str, db: SQLDatabase, chat_history: list):
-#     try:
-#         sql_chain = get_sql_chain(db)
-        
-#         template = """
-#             You are a data analyst at a company. You are interacting with a user who is asking you questions about the company's database.
-#             Based on the table schema below, question, sql query, and sql response, write a natural language response.
-#             <SCHEMA>{schema}</SCHEMA>
-        
-#             Conversation History: {chat_history}
-#             SQL Query: <SQL>{query}</SQL>
-#             User question: {question}
-#             SQL Response: {response}
-#             Please Note: If the SQL Response is showing an error, provide a meaningful message on how to write a prompt that the system would understand based on the error.
-#             """
-        
-#         prompt = ChatPromptTemplate.from_template(template)
-        
-#         llm = ChatOpenAI(model="gpt-3.5-turbo-0125", api_key="sk-proj-fzSeeXdcEINyG09yeUULT3BlbkFJXbWuka1ZPks9j5LVRqrZ")
-        
-#         chain = (
-#             RunnablePassthrough.assign(query=sql_chain).assign(
-#                 schema=lambda _: db.get_table_info(),
-#                 response=lambda vars: db.run(vars["query"]),
-#             )
-#             | prompt
-#             | llm
-#             | StrOutputParser()
-#         )
-        
-#         return chain.invoke({
-#             "question": user_query,
-#             "chat_history": chat_history,
-#         })
-    
-#     except Exception as e:
-#         # Provide user-friendly feedback for SQL errors
-#         error_message = str(e)
-#         if "foreign key constraint" in error_message.lower():
-#             return "Sorry, I couldn't delete the vendor because it is associated with other data in the system. Please remove any associated data first, and then try again."
-#         else:
-#             return "Sorry, something went wrong while processing your request. Please try again or contact support for assistance."
-
   
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = [
@@ -168,10 +124,7 @@ with st.sidebar:
             )
             st.session_state.db = db
             st.success("Connected to database!")
-
-      # db = init_database()
-      # st.session_state.db = db
-
+    
 for message in st.session_state.chat_history:
     if isinstance(message, AIMessage):
         with st.chat_message("AI"):
