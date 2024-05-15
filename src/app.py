@@ -12,8 +12,8 @@ import os
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 
 def init_database(user: str, password: str, host: str, port: str, database: str) -> SQLDatabase:
-  # db_uri = f"mysql+mysqlconnector://{user}:{password}@{host}:{port}/{database}"
-  db_uri = f"mssql+pymssql://{user}:{password}@{host}:{port}/{database}"
+  db_uri = f"mysql+mysqlconnector://{user}:{password}@{host}:{port}/{database}"
+  # db_uri = f"mssql+pymssql://{user}:{password}@{host}:{port}/{database}"
 
 
   return SQLDatabase.from_uri(db_uri)
